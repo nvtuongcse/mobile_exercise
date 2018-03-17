@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>WebService</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
+</head>
+<body>
+	<h1>Ex2: caculate distance</h1>
+	<div id='app'>
+		<label>lat1: </label>
+		<input  v-model="lat1">
+
+<label>lat1: </label>
+		<input  v-model="lon1">
+
+<label>lat1: </label>
+		<input  v-model="lat2">
+
+<label>lat1: </label>
+		<input  v-model="lon2">
+
+<label>result:{{distance}} {{result}}</label>
+		
+	
+	</div>
+	<div>
+		
+	</div>
+	<script>
+	new Vue({
+		el:'#app',
+		data:{
+			lat1: 0.0,
+			lat2: 0.0,
+			lon1: 0.0,
+			lon2: 0.0,
+			result: ''
+		},
+		computed: {
+			distance: function() {
+				if(!this.lat1 || !this.lat2 || !this.lon1 || !this.lon2){ return 'dang xu ly.....';}
+			this.$http.get(`caculate?lat1=${this.lat1}&lat2=${this.lat2}&lon1=${this.lon1}&lon2=${this.lon2}`).then(
+	response => {
+		console.log(response.body.data);
+		var data = response.body.data + '';
+		return this.result = data;
+	}
+), response => {
+	console.log('error')
+}
+			}
+		}
+})
+
+</script>
+</body>
+</html>
